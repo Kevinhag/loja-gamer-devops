@@ -1,0 +1,246 @@
+/* Ajustes da versão Svelte sobre o tema original (theme.css). */
+
+/* Os botões eram <div>; como <button> eles herdam estilos do navegador. :where() tem
+   especificidade zero, então as regras do tema continuam valendo. */
+:where(.product-btn, .cart-product-btn, .search-product-btn, .admin-tab, .cart-qty button, .toast) {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+:where(.product-btn, .search-product-btn):disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.search-wrap {
+  display: contents;
+}
+
+/* .nav-search usa width: inherit, que agora herdaria do wrapper acima */
+.nav-container > .nav-search,
+.search-wrap > .nav-search {
+  width: 100%;
+}
+
+.navLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLogin a {
+  color: var(--maintext);
+  font-size: 14pt;
+  text-decoration: none;
+}
+
+.navLogin a:hover {
+  color: var(--link);
+}
+
+.section-title {
+  margin: 40px 0 -20px;
+  text-align: center;
+  font-family: Chakra Petch;
+  font-size: 18pt;
+  font-style: italic;
+  text-transform: uppercase;
+  color: var(--maintext);
+}
+
+.page-message {
+  padding: 60px 20px;
+  text-align: center;
+  font-family: Chakra Petch;
+  font-size: 14pt;
+  color: var(--text);
+}
+
+.page-message a,
+.admin-btn a {
+  color: var(--link);
+}
+
+.image-placeholder {
+  font-size: 48px;
+  color: var(--border);
+}
+
+.navCart a {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -14px;
+  right: -16px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: var(--mainborder);
+  color: var(--maintext);
+  font-family: Chakra Petch;
+  font-size: 10pt;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+
+.unit-price {
+  display: block;
+  font-size: 9pt;
+  color: var(--text);
+}
+
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  font-family: Chakra Petch;
+  font-size: 12pt;
+}
+
+.cart-qty button {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--mainborder);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-qty button:hover:not(:disabled) {
+  background: var(--mainborder);
+}
+
+.cart-qty button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cart-summary-line {
+  align-self: flex-end;
+  padding: 16px 24px;
+  font-family: Chakra Petch;
+  font-size: 14pt;
+}
+
+a.checkout-btn {
+  color: var(--maintext);
+  text-decoration: none;
+}
+
+.order-ok {
+  font-size: 48px;
+  color: var(--statok);
+  margin-bottom: 10px;
+}
+
+/* Admin */
+.admin-tab {
+  margin: 0 8px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.admin-tab.active {
+  color: var(--maintext);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.admin-logout {
+  margin-left: 24px;
+  color: var(--link);
+}
+
+.admin-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 0;
+  font-family: Chakra Petch;
+}
+
+fieldset.admin-product-form {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.admin-product-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.field-error {
+  display: block;
+  font-size: 10pt;
+  color: var(--statnok);
+}
+
+.form-add input[aria-invalid="true"] {
+  border-color: var(--statnok);
+}
+
+.checkbox-row {
+  display: flex;
+  gap: 20px;
+}
+
+.checkbox-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-add .checkbox-row input {
+  width: auto;
+}
+
+/* Notificações */
+.toasts {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: min(400px, calc(100vw - 32px));
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 10px 0;
+  background: var(--cardbg);
+  border: 1px solid var(--statok);
+  box-shadow: 0 4px 20px #000a;
+  font-family: Chakra Petch;
+  font-size: 12pt;
+  text-align: left;
+  cursor: pointer;
+}
+
+.toast-ok i {
+  color: var(--statok);
+}
+
+.toast-error {
+  border-color: var(--statnok);
+}
+
+.toast-error i {
+  color: var(--statnok);
+}

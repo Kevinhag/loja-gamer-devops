@@ -1,0 +1,1308 @@
+:root {
+  /* background-color: var(--bodybg); */
+  scroll-behavior: smooth;
+  transition: background-color var(--theme-anim-time);
+}
+
+/* ################################ */
+/* --------------TAGS-------------- */
+/* ################################ */
+
+html {
+  /* ----------Black Theme---------- */
+  --maintext: #f8f8f6;
+  --text: #aaa;
+  --mainborder: #cc0000;
+  --border: #666;
+  --shadowhard: #ff0000ee;
+  --shadowsoft: #b900b9ee;
+  --grayedout: #ffb86c;
+  --standout: #ff5555;
+  --link: #bd93f9;
+  --statok: #50fa7b;
+  --statnok: #ff5555;
+  --maintitle: #ffb86c;
+  --boxtitle: #bd93f9;
+  --alttitle: #ff79c6;
+  --bodybg: #141414;
+  --cardbg: #1a1a1a;
+  --boxbg: #202124;
+  --boxbg2: #303134;
+  --tabbg: #141414bb;
+  --secbg: #003434;
+  --secborder: #ff79c6;
+
+  --theme-anim-time: 400ms;
+  --cardradius: 20px;
+  --navheight: 80px;
+  --delay: 0.5s;
+}
+
+body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bodybg);
+  color: var(--maintext);
+  margin: 0;
+  font-family: "Roboto";
+  font-size: 22px;
+  transition: var(--theme-anim-time);
+  z-index: -10;
+}
+
+.parallax-bg{
+ background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 304 304' width='304' height='304'%3E%3Cpath fill='%23272629' fill-opacity='0.4' d='M44.1 224a5 5 0 1 1 0 2H0v-2h44.1zm160 48a5 5 0 1 1 0 2H82v-2h122.1zm57.8-46a5 5 0 1 1 0-2H304v2h-42.1zm0 16a5 5 0 1 1 0-2H304v2h-42.1zm6.2-114a5 5 0 1 1 0 2h-86.2a5 5 0 1 1 0-2h86.2zm-256-48a5 5 0 1 1 0 2H0v-2h12.1zm185.8 34a5 5 0 1 1 0-2h86.2a5 5 0 1 1 0 2h-86.2zM258 12.1a5 5 0 1 1-2 0V0h2v12.1zm-64 208a5 5 0 1 1-2 0v-54.2a5 5 0 1 1 2 0v54.2zm48-198.2V80h62v2h-64V21.9a5 5 0 1 1 2 0zm16 16V64h46v2h-48V37.9a5 5 0 1 1 2 0zm-128 96V208h16v12.1a5 5 0 1 1-2 0V210h-16v-76.1a5 5 0 1 1 2 0zm-5.9-21.9a5 5 0 1 1 0 2H114v48H85.9a5 5 0 1 1 0-2H112v-48h12.1zm-6.2 130a5 5 0 1 1 0-2H176v-74.1a5 5 0 1 1 2 0V242h-60.1zm-16-64a5 5 0 1 1 0-2H114v48h10.1a5 5 0 1 1 0 2H112v-48h-10.1zM66 284.1a5 5 0 1 1-2 0V274H50v30h-2v-32h18v12.1zM236.1 176a5 5 0 1 1 0 2H226v94h48v32h-2v-30h-48v-98h12.1zm25.8-30a5 5 0 1 1 0-2H274v44.1a5 5 0 1 1-2 0V146h-10.1zm-64 96a5 5 0 1 1 0-2H208v-80h16v-14h-42.1a5 5 0 1 1 0-2H226v18h-16v80h-12.1zm86.2-210a5 5 0 1 1 0 2H272V0h2v32h10.1zM98 101.9V146H53.9a5 5 0 1 1 0-2H96v-42.1a5 5 0 1 1 2 0zM53.9 34a5 5 0 1 1 0-2H80V0h2v34H53.9zm60.1 3.9V66H82v64H69.9a5 5 0 1 1 0-2H80V64h32V37.9a5 5 0 1 1 2 0zM101.9 82a5 5 0 1 1 0-2H128V37.9a5 5 0 1 1 2 0V82h-28.1zm16-64a5 5 0 1 1 0-2H146v44.1a5 5 0 1 1-2 0V18h-26.1zm102.2 270a5 5 0 1 1 0 2H98v14h-2v-16h124.1zM242 149.9V160h16v34h-16v62h48v48h-2v-46h-48v-66h16v-30h-16v-12.1a5 5 0 1 1 2 0zM53.9 18a5 5 0 1 1 0-2H64V2H48V0h18v18H53.9zm112 32a5 5 0 1 1 0-2H192V0h50v2h-48v48h-28.1zm-48-48a5 5 0 0 1-9.8-2h2.07a3 3 0 1 0 5.66 0H178v34h-18V21.9a5 5 0 1 1 2 0V32h14V2h-58.1zm0 96a5 5 0 1 1 0-2H137l32-32h39V21.9a5 5 0 1 1 2 0V66h-40.17l-32 32H117.9zm28.1 90.1a5 5 0 1 1-2 0v-76.51L175.59 80H224V21.9a5 5 0 1 1 2 0V82h-49.59L146 112.41v75.69zm16 32a5 5 0 1 1-2 0v-99.51L184.59 96H300.1a5 5 0 0 1 3.9-3.9v2.07a3 3 0 0 0 0 5.66v2.07a5 5 0 0 1-3.9-3.9H185.41L162 121.41v98.69zm-144-64a5 5 0 1 1-2 0v-3.51l48-48V48h32V0h2v50H66v55.41l-48 48v2.69zM50 53.9v43.51l-48 48V208h26.1a5 5 0 1 1 0 2H0v-65.41l48-48V53.9a5 5 0 1 1 2 0zm-16 16V89.41l-34 34v-2.82l32-32V69.9a5 5 0 1 1 2 0zM12.1 32a5 5 0 1 1 0 2H9.41L0 43.41V40.6L8.59 32h3.51zm265.8 18a5 5 0 1 1 0-2h18.69l7.41-7.41v2.82L297.41 50H277.9zm-16 160a5 5 0 1 1 0-2H288v-71.41l16-16v2.82l-14 14V210h-28.1zm-208 32a5 5 0 1 1 0-2H64v-22.59L40.59 194H21.9a5 5 0 1 1 0-2H41.41L66 216.59V242H53.9zm150.2 14a5 5 0 1 1 0 2H96v-56.6L56.6 162H37.9a5 5 0 1 1 0-2h19.5L98 200.6V256h106.1zm-150.2 2a5 5 0 1 1 0-2H80v-46.59L48.59 178H21.9a5 5 0 1 1 0-2H49.41L82 208.59V258H53.9zM34 39.8v1.61L9.41 66H0v-2h8.59L32 40.59V0h2v39.8zM2 300.1a5 5 0 0 1 3.9 3.9H3.83A3 3 0 0 0 0 302.17V256h18v48h-2v-46H2v42.1zM34 241v63h-2v-62H0v-2h34v1zM17 18H0v-2h16V0h2v18h-1zm273-2h14v2h-16V0h2v16zm-32 273v15h-2v-14h-14v14h-2v-16h18v1zM0 92.1A5.02 5.02 0 0 1 6 97a5 5 0 0 1-6 4.9v-2.07a3 3 0 1 0 0-5.66V92.1zM80 272h2v32h-2v-32zm37.9 32h-2.07a3 3 0 0 0-5.66 0h-2.07a5 5 0 0 1 9.8 0zM5.9 0A5.02 5.02 0 0 1 0 5.9V3.83A3 3 0 0 0 3.83 0H5.9zm294.2 0h2.07A3 3 0 0 0 304 3.83V5.9a5 5 0 0 1-3.9-5.9zm3.9 300.1v2.07a3 3 0 0 0-1.83 1.83h-2.07a5 5 0 0 1 3.9-3.9zM97 100a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-48 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 96a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-144a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM49 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM33 68a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 240a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm80-176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm112 176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 180a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 84a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'%3E%3C/path%3E%3C/svg%3E");
+  width: 100%;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-size: 304px;
+}
+main {
+  padding-top: var(--navheight);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bodybg);
+  color: var(--border);
+  font-family: Chakra Petch;
+  font-size: 11pt;
+  font-weight: 100;
+  font-style: italic;
+  width: 100%;
+  height: 120px;
+  border-top: red 5px solid;
+  animation: rainbow-border 5s linear infinite;
+  box-shadow: var(--mainborder) 0px 0px 10px, var(--shadowsoft) 0px 0px 25px;
+}
+
+header nav div img {
+  height: 60px;
+}
+
+.search-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: auto;
+  width: auto;
+  top: 65px;
+  left: 100px;
+}
+
+.admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.admin-base{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  height: 100px;
+  min-height: 100px;
+  font-family: Chakra Petch;
+}
+
+.admin section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.section-container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  border: 1px solid;
+  border-radius: 20px 0px;
+  background-color: #44444466;
+  width: 70%;
+  height: auto;
+  min-height: 650px;
+  min-width: 300px;
+  max-width: 980px;
+  animation: rainbow-border 5s linear infinite;
+}
+
+
+
+.adminLogo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 100px;
+}
+
+.admin-product-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.admin-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.admin-form input[type="file"] {
+  margin: 10px;
+  margin-top: 0px;
+  width: 270px;
+  font-family: Chakra Petch;
+  font-size: 14pt;
+}
+
+input[type="file"]::file-selector-button{
+  background-color: var(--cardbg);
+  color: var(--maintext);
+  border: 1px solid var(--mainborder);
+  cursor: pointer;
+  font-family: Chakra Petch;
+  font-size: 10pt;
+  font-weight: 800;
+  font-style: italic;
+  width: 150px;
+  height: 40px;
+  transition: var(--theme-anim-time);
+  text-transform: uppercase;
+  border-radius: 10px 0px 10px 0px;
+  min-width: 100px;
+  width: 150px;
+
+}
+
+input[type="file"]::file-selector-button:hover{
+  box-shadow: var(--shadowsoft) 0px 0px 10px inset,
+  var(--shadowsoft) 0px 0px 10px;
+background-color: var(--mainborder);
+color: var(--cardbg);
+}
+
+.admin-product-form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.admin-btn {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  margin-top: 25px;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-btn button{
+  background-color: var(--cardbg);
+  color: var(--maintext);
+  border: 1px solid var(--mainborder);
+  cursor: pointer;
+  font-family: Chakra Petch;
+  font-size: 10pt;
+  font-weight: 800;
+  font-style: italic;
+  width: 150px;
+  height: 40px;
+  transition: var(--theme-anim-time);
+  text-transform: uppercase;
+  border-radius: 10px 0px 10px 0px;
+}
+
+.admin-btn button:hover{
+  box-shadow: var(--shadowsoft) 0px 0px 10px inset,
+    var(--shadowsoft) 0px 0px 10px;
+  background-color: var(--mainborder);
+  color: var(--cardbg);
+}
+
+
+
+.form-add {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-add div {
+  display:flex;
+  flex-wrap: nowrap;
+}
+
+.form-add input{
+background-color: var(--bodybg);
+border: var(--border) 1px solid;
+color: var(--maintext);
+width: 50%;
+}
+
+.form-add input:focus{
+  animation: rainbow-border 5s linear infinite;
+}
+
+.form-add label {
+  display: inline-block;
+  margin-right: 5px;
+  width: 150px;
+  font-family: Chakra Petch;
+  font-size: 14pt;
+  text-align: right;
+}
+
+.admin-product-img {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border) 1px solid;
+  width: 200px;
+  min-width: 200px;
+  height: 150px;
+  min-height: 150px;
+}
+
+.cartMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.checkoutMain {
+  background-color: transparent;
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.cart-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  min-height: 600px;
+}
+
+.checkout-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.cards-checkout {
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+  min-height: 600px;
+}
+
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 20px 0px;
+  background-color: #44444466;
+  width: 80%;
+  height: 100%;
+  overflow:hidden;
+  animation: rainbow-border 5s linear infinite;
+}
+
+.checkout-total {
+  padding: 20px;
+  font-family: Chakra Petch;
+  font-size: 14pt;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px 0px;
+  background-color: var(--cardbg);
+  width: 40%;
+  min-width: 320px;
+  height: 400px;
+  animation: rainbow-border 5s linear infinite;
+}
+
+/* ################################ */
+/* ----------ALINHAMENTO----------- */
+/* ################################ */
+
+.hidden {
+  display: none;
+}
+
+.divMain {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 20px;
+}
+
+.flexCol {
+  display: flex;
+  width: inherit;
+  align-items: center;
+  justify-content: center;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+}
+
+/* ################################ */
+/* -------BARRA DE NAVEGAÇÃO------- */
+/* ################################ */
+
+.nav {
+  position: absolute;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+  background-color: var(--tabbg);
+  border-bottom: 1px solid var(--mainborder);
+  box-shadow: var(--mainborder) 0px 0px 20px;
+  background-size: 100%;
+  position: fixed;
+  z-index: 1;
+  color: white;
+  height: var(--navheight);
+  width: 100%;
+  transition: var(--theme-anim-time);
+}
+
+.nav-container{
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+  max-width: 980px;
+  width: 100%;
+  height: 100%;
+}
+
+.navLogo {
+  position: relative;
+  height: 100%;
+  width: 110px;
+}
+
+.navLogo img {
+  position: absolute;
+  translate: -50% -50%;
+  top: 50%;
+  left: 50%;
+}
+
+.navSwitch {
+  display: flex;
+  align-items: center;
+  justify-content: first baseline;
+  height: 100%;
+  width: 60px;
+}
+
+.navCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: var(--mainborder) 1px solid;
+}
+
+.navCart a {
+  display: flex;
+  color: var(--border);
+}
+
+.navLogin {
+  position: relative;
+  font-family: Chakra Petch;
+  width: 150px;
+  height: 100%;
+  right: 0px;
+  color: var(--maintext);
+  transition: var(--theme-anim-time);
+}
+
+.navLogin div {
+  position: absolute;
+  translate: 50% -50%;
+  top: 50%;
+  right: 50%;
+  color: var(--maintext);
+}
+
+.nav-search {
+  position: relative;
+  display: flex;
+  width: inherit;
+  align-items: center;
+  justify-content: center;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+}
+
+.nav-search i {
+  color: var(--border);
+  position: absolute;
+  left: 10px;
+  z-index: 2;
+}
+
+input[type="search"] {
+  color: var(--maintext);
+  position: absolute;
+  min-width: 120px;
+  top: 50%;
+  left: 0px;
+  width: 10%;
+  height: 40px;
+  translate: 0% -50%;
+  outline: none;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: var(--bodybg);
+  padding: 12px 20px 12px 40px;
+  transition: var(--theme-anim-time);
+}
+
+input[type="search"]:hover {
+  width: 30vw;
+}
+
+input[type="search"]:focus {
+  width: 30vw;
+  animation: rainbow-border 5s linear infinite;
+}
+
+.pDD{
+  background-color: var(--bodybg);
+  font-family: Chakra Petch;
+  font-size: 14pt;
+  color: var(--maintext);
+  height: 40px;
+  border-radius: 5px;
+  width: 340px;
+  min-width: 100px;
+}
+
+
+/* ################################ */
+/* --------BANNER PRINCIPAL-------- */
+/* ################################ */
+
+.main-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  offset: 10px;
+  width: 100%;
+  height: 600px;
+}
+
+#promo-banner {
+  padding: 120px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: -100;
+}
+
+.text-promo {
+  position: absolute;
+  right: 7%;
+  width: 60%;
+  height: 60%;
+  overflow: hidden;
+}
+
+.text-promo img {
+  height: 120%;
+  z-index: -10;
+}
+
+.logo-promo {
+  position: absolute;
+  top: 50%;
+  left: 18%;
+  translate: -50% -50%;
+  animation: pulse 0.5s ease-out infinite;
+}
+
+.cards-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 100%;
+  height: auto;
+  min-height: 600px;
+  background: transparent;
+}
+
+/* ################################ */
+/* -------------CARDS-------------- */
+/* ################################ */
+
+.product {
+  background-color: var(--cardbg);
+  color: var(--maintext);
+  position: relative;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  min-width: 200px;
+  height: 400px;
+  gap: 0;
+  border-radius: calc(var(--cardradius) - 1px) 0px;
+  /* transition: box-shadow 0.4s ease 0s, border-radius var(--theme-anim-time), color var(--theme-anim-time); */
+  transition: var(--theme-anim-time);
+  box-shadow: rgba(40, 41, 61, 0.08) 0px 0px 1px,
+    rgba(96, 97, 112, 0.16) 0px 0.5px 2px;
+}
+
+
+.product-cart {
+  background-color: var(--cardbg);
+  color: var(--maintext);
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 120px;
+  border-radius: calc(var(--cardradius) - 1px) 0px;
+  /* transition: box-shadow 0.4s ease 0s, border-radius var(--theme-anim-time), color var(--theme-anim-time); */
+  transition: var(--theme-anim-time);
+  box-shadow: rgba(40, 41, 61, 0.08) 0px 0px 1px,
+    rgba(96, 97, 112, 0.16) 0px 0.5px 2px;
+}
+
+.product-search {
+  background-color: var(--cardbg);
+  color: var(--maintext);
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+  width: 550px;
+  height: 120px;
+  border-radius: calc(var(--cardradius) - 1px) 0px;
+  /* transition: box-shadow 0.4s ease 0s, border-radius var(--theme-anim-time), color var(--theme-anim-time); */
+  transition: var(--theme-anim-time);
+  box-shadow: rgba(40, 41, 61, 0.08) 0px 0px 1px,
+    rgba(96, 97, 112, 0.16) 0px 0.5px 2px;
+}
+
+.card-hover:hover {
+  scale: 105%;
+  box-shadow: var(--mainborder) 0px 0px 10px, var(--shadowsoft) 0px 0px 25px;
+  transition: 200ms;
+}
+
+.card-product-name {
+  border: 1px var(--border) solid;
+  padding: 10px;
+  justify-content: flex-start;
+  height: 56px;
+  width: 100%;
+  border-radius: 10px 0px 0px 0px;
+}
+
+.cart-card-product-name {
+  position: relative;
+  display: flex;
+  border: 1px var(--border) solid;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  width: 20%;
+  border-radius: 20px 0px 0px 0px;
+}
+
+.product-line {
+  color: var(--text);
+  position: absolute;
+  translate: -50%, 50%;
+  top: 42px;
+  right: 0;
+  align-items: center;
+  font-family: Chakra Petch;
+  font-size: 11pt;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.product-brand {
+  color: var(--text);
+  position: absolute;
+  top: 42px;
+  align-items: center;
+  font-family: Chakra Petch;
+  font-size: 11pt;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.cart-product-brand {
+  color: var(--text);
+  position: absolute;
+  top: 30px;
+  align-items: center;
+  font-family: Chakra Petch;
+  font-size: 11pt;
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+.product-name {
+  color: var(--maintext);
+  top: 20px;
+  white-space: nowrap;
+  position: absolute;
+  font-family: Chakra Petch;
+  font-size: 15pt;
+  font-weight: 600;
+}
+
+.cart-product-name {
+  color: var(--maintext);
+  top: 10px;
+  position: absolute;
+  font-family: Chakra Petch;
+  font-size: 15pt;
+  font-weight: 600;
+}
+
+.card-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 1px var(--border) solid;
+  font-family: Chakra Petch;
+  font-weight: 600;
+  font-size: 16pt;
+}
+
+.cart-card-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  height: 60px;
+  border: 1px var(--border) solid;
+  font-family: Chakra Petch;
+  font-weight: 600;
+  font-size: 16pt;
+}
+
+.search-card-price {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 60px;
+  border: 1px var(--border) solid;
+  font-family: Chakra Petch;
+  font-weight: 600;
+  font-size: 14pt;
+  padding: 10px;
+}
+
+
+.product-img {
+  size-adjust: -1px;
+  display: inherit;
+  align-items: center;
+  justify-content: center;
+  /* object-fit: contain; */
+  height: 50%;
+  transition: var(--theme-anim-time);
+}
+
+.product-img img {
+height: 160px;
+
+}
+
+.cart-product-img {
+  size-adjust: -1px;
+  display: inherit;
+  align-items: center;
+  justify-content: center;
+  /* object-fit: contain; */
+  height: 100%;
+  transition: var(--theme-anim-time);
+}
+
+.cart-product-img img {
+  height: 90%;
+}
+
+.search-product-img {
+  margin-left: 60px;
+  size-adjust: -1px;
+  display: inherit;
+  align-items: center;
+  justify-content: center;
+ height: 100%;
+  
+  transition: var(--theme-anim-time);
+}
+
+.search-product-img img {
+  height: 100%;
+}
+
+
+.card-rating {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* background: red; */
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+}
+
+.cart-card-rating {
+  padding-right: 115px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.search-card-rating {
+  margin-right: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 100%;
+
+}
+
+.rating-users {
+  font-size: 8pt;
+}
+
+.rating-stars {
+  font-size: 12pt;
+}
+
+.product-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cardbg);
+  color: var(--maintext);
+  border: 1px solid var(--mainborder);
+  cursor: pointer;
+  font-family: Chakra Petch;
+  font-size: 10pt;
+  font-weight: 800;
+  font-style: italic;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  transition: var(--theme-anim-time);
+  text-transform: uppercase;
+  border-radius: 0px 0px 20px 0px;
+}
+
+.product-btn:hover {
+  box-shadow: var(--shadowsoft) 0px 0px 10px inset,
+    var(--shadowsoft) 0px 0px 10px;
+  background-color: var(--mainborder);
+  color: var(--cardbg);
+}
+
+.cart-product-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cardbg);
+  color: var(--maintext);
+  border: 1px solid var(--mainborder);
+  cursor: pointer;
+  font-family: Chakra Petch;
+  font-size: 12pt;
+  font-weight: 800;
+  font-style: italic;
+  width: 130px;
+  height: 100%;
+  transition: var(--theme-anim-time);
+  text-transform: uppercase;
+  border-radius: 0px 0px 20px 0px;
+  right: 0;
+}
+
+.cart-product-btn:hover {
+  box-shadow: var(--shadowsoft) 0px 0px 10px inset,
+    var(--shadowsoft) 0px 0px 10px;
+  background-color: var(--mainborder);
+  color: var(--cardbg);
+}
+
+.search-product-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cardbg);
+  color: var(--maintext);
+  border: 1px solid var(--mainborder);
+  cursor: pointer;
+  font-family: Chakra Petch;
+  font-size: 16pt;
+  font-weight: 800;
+  font-style: italic;
+  width: 50px;
+  height: 100%;
+  transition: var(--theme-anim-time);
+  text-transform: uppercase;
+  border-radius: 0px 0px 20px 0px;
+  right: 0;
+}
+
+.search-product-btn:hover {
+  box-shadow: var(--shadowsoft) 0px 0px 10px inset,
+    var(--shadowsoft) 0px 0px 10px;
+  background-color: var(--mainborder);
+  color: var(--cardbg);
+}
+
+.checkout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border: 1px solid var(--mainborder);
+  width: 80%;
+  height: 100px;
+  font-family: Chakra Petch;
+  font-size: 16pt;
+  font-weight: 800;
+  font-style: italic;
+  cursor: pointer;
+  background-color: #11f;
+  background-color: var(--cardbg);
+  border-radius: 0px 0px 20px 0px;
+  bottom: 0;
+  z-index: 2;
+}
+
+
+.product-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Chakra Petch;
+  font-size: 12pt;
+  font-weight: 800;
+  animation: rainbow 3s infinite;
+  position: absolute;
+  width: 70px;
+  top: 80px;
+  left: 15px;
+  background-color: var(--cardbg);
+  border-radius: 10px 0px;
+  box-shadow: var(--mainborder) 0px 0px 10px, var(--shadowsoft) 0px 0px 25px;
+}
+
+.cart-product-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Chakra Petch;
+  font-size: 12pt;
+  font-weight: 800;
+  animation: rainbow 3s infinite;
+  width: 70px;
+  background-color: var(--cardbg);
+  border-radius: 10px 0px;
+  box-shadow: var(--mainborder) 0px 0px 10px, var(--shadowsoft) 0px 0px 25px;
+}
+
+.search-cart-btn{
+  width: 50px;
+  height: 20px;
+}
+
+.rating-stars :nth-child(1) {
+  animation-delay: calc(var(--delay) * -3);
+}
+
+.rating-stars :nth-child(2) {
+  animation-delay: calc(var(--delay) * -2.5);
+}
+
+.rating-stars :nth-child(3) {
+  animation-delay: calc(var(--delay) * -2);
+}
+
+.rating-stars :nth-child(4) {
+  animation-delay: calc(var(--delay) * -1.5);
+}
+
+.rating-stars :nth-child(5) {
+  animation-delay: calc(var(--delay) * -1);
+}
+
+/* ################################ */
+/* ----------THEME SWITCH---------- */
+/* ################################ */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 28px;
+}
+
+.switch input {
+  visibility: hidden;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bodybg);
+  border: 1px solid var(--mainborder);
+  transition: var(--theme-anim-time);
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--mainborder);
+  transition: var(--theme-anim-time);
+}
+
+input:checked + .slider {
+  background-color: whitesmoke;
+  border-radius: 14px;
+}
+
+input.focus + .slider {
+  box-shadow: 0 0 1px black;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+  border-radius: 10px;
+  background-color: var(--mainborder);
+}
+
+/* ################################ */
+/* -------------BORDAS------------- */
+/* ################################ */
+
+.common {
+  display: inline-block;
+  border: 2px solid var(--mainborder);
+  border-radius: var(--cardradius) 0px;
+  transition: 200ms;
+}
+
+.common-cart {
+  display: inline-block;
+  border: 2px solid var(--mainborder);
+  border-radius: var(--cardradius) 0px;
+  transition: 200ms;
+  width: 100%;
+}
+
+
+.promotion {
+  /* display: inline-block; */
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--cardradius) 0px;
+  padding: 2px;
+  transition: 200ms;
+}
+
+.promotion::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: conic-gradient(#f11, #ff1, #1f1, #1ff, #11f, #f1f, #f11);
+  animation: rotate-rainbow 5s linear infinite;
+  /* z-index: 1; */
+}
+
+.promotion-cart {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--cardradius) 0px;
+  padding: 2px;
+  transition: 200ms;
+  width: 100%;
+}
+
+.promotion-cart::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: conic-gradient(#f11, #ff1, #1f1, #1ff, #11f, #f1f, #f11);
+  animation: rotate-rainbow 5s linear infinite;
+  /* z-index: 1; */
+}
+
+
+
+/* ################################ */
+/* -----------ANIMAÇÕES------------ */
+/* ################################ */
+
+@keyframes rainbow-border {
+  100%,
+  0% {
+    border-color: rgb(255, 0, 0);
+  }
+  8% {
+    border-color: rgb(255, 127, 0);
+  }
+  16% {
+    border-color: rgb(255, 255, 0);
+  }
+  25% {
+    border-color: rgb(127, 255, 0);
+  }
+  33% {
+    border-color: rgb(0, 255, 0);
+  }
+  41% {
+    border-color: rgb(0, 255, 127);
+  }
+  50% {
+    border-color: rgb(0, 255, 255);
+  }
+  58% {
+    border-color: rgb(0, 127, 255);
+  }
+  66% {
+    border-color: rgb(0, 0, 255);
+  }
+  75% {
+    border-color: rgb(127, 0, 255);
+  }
+  83% {
+    border-color: rgb(255, 0, 255);
+  }
+  91% {
+    border-color: rgb(255, 0, 127);
+  }
+}
+
+@keyframes rainbow {
+  100%,
+  0% {
+    color: rgb(255, 0, 0);
+  }
+  8% {
+    color: rgb(255, 127, 0);
+  }
+  16% {
+    color: rgb(255, 255, 0);
+  }
+  25% {
+    color: rgb(127, 255, 0);
+  }
+  33% {
+    color: rgb(0, 255, 0);
+  }
+  41% {
+    color: rgb(0, 255, 127);
+  }
+  50% {
+    color: rgb(0, 255, 255);
+  }
+  58% {
+    color: rgb(0, 127, 255);
+  }
+  66% {
+    color: rgb(0, 0, 255);
+  }
+  75% {
+    color: rgb(127, 0, 255);
+  }
+  83% {
+    color: rgb(255, 0, 255);
+  }
+  91% {
+    color: rgb(255, 0, 127);
+  }
+}
+
+@keyframes hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes rotate-rainbow {
+  0% {
+    transform: scale(15) rotate(0);
+  }
+  50% {
+    transform: scale(15) rotate(180deg);
+  }
+  100% {
+    transform: scale(15) rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    height: 80%;
+  }
+  75% {
+    height: 79%;
+  }
+}
+
+.containerqqc {
+  padding: 35px;
+  width: 100%;
+  height: 100%;
+  max-width: 90%px;
+}
+
+.borda {
+  border-radius: 6px;
+  background-color: transparent;
+  border: red 3px dotted;
+  position: absolute;
+}
+
+.rainbow-border {
+  animation: rainbow-border 5s linear infinite;
+}
+
+.rainbow {
+  animation: rainbow 5s linear infinite;
+}
+
+@media (max-width: 900px) {
+  .adminLogo{
+    display: none;
+  }
+
+}
+
+@media (max-width: 980px) {
+  .logo-promo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* translate: -6vw -50%; */
+    left: 85px;
+    
+  }
+
+  .text-promo{
+    display: none;
+  }
+
+
+}

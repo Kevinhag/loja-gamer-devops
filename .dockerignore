@@ -1,0 +1,13 @@
+.git
+.github
+**/node_modules
+frontend/dist
+frontend/coverage
+frontend/test-results
+backend/coverage*
+backend/test-results
+docs
+*.md
+.env
+.env.*
+!deploy/.env.example

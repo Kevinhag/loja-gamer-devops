@@ -1,0 +1,222 @@
+# Pipeline CI/CD da K.O Gaming Store
+#
+#   CI  (todo push e PR na main): testes Go + MySQL, testes Svelte, build, imagem Docker, smoke test
+#   CD  (só push na main):        copia a imagem para a EC2, troca o container e valida o deploy
+#
+# Pré-requisitos no Azure DevOps (veja docs/GUIA-DEPLOY.md):
+#   - Service connection SSH chamada "ec2-ssh" apontando para a EC2
+#   - Variável de pipeline EC2_HOST com o IP/DNS público da EC2
+#   - Environment "lojagamer-producao" (é criado sozinho na primeira execução)
+
+trigger:
+  branches:
+    include: [main]
+
+pr:
+  branches:
+    include: [main]
+
+variables:
+  imageName: lojagamer
+  imageTag: $(Build.BuildId)
+  sshServiceConnection: ec2-ssh
+  goVersion: "1.26.10"
+  nodeVersion: "24.x"
+  testMysqlDsn: "root:test@tcp(127.0.0.1:3306)/lojagamer_test?parseTime=true&multiStatements=true"
+
+stages:
+  - stage: CI
+    displayName: "CI · build e testes"
+    jobs:
+      - job: build_test
+        displayName: "Build, testes e imagem Docker"
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - checkout: self
+            fetchDepth: 1
+            displayName: "Obter código-fonte"
+
+          - task: GoTool@0
+            displayName: "Instalar Go $(goVersion)"
+            inputs:
+              version: $(goVersion)
+
+          - task: NodeTool@0
+            displayName: "Instalar Node $(nodeVersion)"
+            inputs:
+              versionSpec: $(nodeVersion)
+
+          - script: |
+              docker run -d --name mysql-test \
+                -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=lojagamer_test \
+                -p 3306:3306 mysql:8.4
+              for i in $(seq 1 60); do
+                if docker exec mysql-test mysqladmin ping -h127.0.0.1 -ptest --silent 2>/dev/null; then
+                  echo "MySQL pronto"; exit 0
+                fi
+                sleep 2
+              done
+              docker logs mysql-test
+              exit 1
+            displayName: "Subir MySQL para os testes de integração"
+
+          # ---------------- Backend ----------------
+          - script: |
+              set -euo pipefail
+              go install gotest.tools/gotestsum@v1.13.0
+              go install github.com/boumenot/gocover-cobertura@v1.4.0
+              echo "##vso[task.prependpath]$(go env GOPATH)/bin"
+            displayName: "Instalar ferramentas de relatório (Go)"
+
+          - script: |
+              set -euo pipefail
+              test -z "$(gofmt -l .)" || { echo "Arquivos sem gofmt:"; gofmt -l .; exit 1; }
+              go vet ./...
+              go build ./...
+            workingDirectory: backend
+            displayName: "Build e análise estática (Go)"
+
+          - script: |
+              set -euo pipefail
+              mkdir -p test-results coverage
+              gotestsum --junitfile test-results/junit.xml --format testname -- \
+                -race -count=1 -covermode=atomic -coverpkg=./internal/... -coverprofile=coverage.out ./...
+              go tool cover -func=coverage.out | tail -1
+              gocover-cobertura < coverage.out > coverage/cobertura.xml
+            workingDirectory: backend
+            displayName: "Testes unitários e de integração (Go + MySQL)"
+            env:
+              TEST_MYSQL_DSN: $(testMysqlDsn)
+
+          # ---------------- Frontend ----------------
+          - script: npm ci --no-audit --no-fund
+            workingDirectory: frontend
+            displayName: "Instalar dependências (frontend)"
+
+          - script: npm run test:ci
+            workingDirectory: frontend
+            displayName: "Testes do frontend (Vitest)"
+
+          - script: npm run build
+            workingDirectory: frontend
+            displayName: "Build do frontend (Vite)"
+
+          # ---------------- Relatórios ----------------
+          - task: PublishTestResults@2
+            displayName: "Publicar resultados dos testes"
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFormat: JUnit
+              testResultsFiles: "**/test-results/junit.xml"
+              mergeTestResults: true
+              testRunTitle: "Go + Vitest"
+              failTaskOnFailedTests: true
+
+          - task: PublishCodeCoverageResults@2
+            displayName: "Publicar cobertura de código"
+            condition: succeededOrFailed()
+            inputs:
+              summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/coverage/cobertura*.xml"
+
+          # ---------------- Docker ----------------
+          - script: |
+              docker build \
+                --build-arg APP_VERSION=$(Build.SourceVersion) \
+                -t $(imageName):$(imageTag) .
+              docker image ls $(imageName)
+            displayName: "Construir imagem Docker"
+
+          - script: |
+              set -euo pipefail
+              docker exec mysql-test mysql -uroot -ptest -e "CREATE DATABASE lojagamer_smoke"
+              docker run -d --name smoke --network host \
+                -e PORT=18080 -e DB_HOST=127.0.0.1 -e DB_PASSWORD=test -e DB_NAME=lojagamer_smoke \
+                -e ADMIN_TOKEN=smoke $(imageName):$(imageTag)
+              for i in $(seq 1 30); do
+                if curl -fsS http://127.0.0.1:18080/healthz; then break; fi
+                sleep 2
+              done
+              echo
+              curl -fsS http://127.0.0.1:18080/healthz | jq -e '.status == "ok"'
+              curl -fsS http://127.0.0.1:18080/api/products | jq -e 'length > 0'
+              curl -fsS -o /dev/null http://127.0.0.1:18080/
+              echo "Smoke test OK"
+            displayName: "Smoke test da imagem"
+
+          - script: |
+              docker logs smoke 2>&1 | tail -50
+            displayName: "Logs do smoke test"
+            condition: failed()
+
+          - script: |
+              set -euo pipefail
+              mkdir -p $(Build.ArtifactStagingDirectory)/release
+              docker save $(imageName):$(imageTag) | gzip > $(Build.ArtifactStagingDirectory)/release/image.tar.gz
+              cp deploy/deploy.sh $(Build.ArtifactStagingDirectory)/release/
+              ls -lh $(Build.ArtifactStagingDirectory)/release
+            displayName: "Empacotar imagem"
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+
+          - task: PublishPipelineArtifact@1
+            displayName: "Publicar artefato"
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+            inputs:
+              targetPath: $(Build.ArtifactStagingDirectory)/release
+              artifact: release
+
+  - stage: CD
+    displayName: "CD · deploy na EC2"
+    dependsOn: CI
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), ne(variables['Build.Reason'], 'PullRequest'))
+    jobs:
+      - deployment: deploy_ec2
+        displayName: "Deploy na EC2"
+        pool:
+          vmImage: ubuntu-latest
+        environment: lojagamer-producao
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: release
+                  displayName: "Baixar artefato"
+
+                - task: CopyFilesOverSSH@0
+                  displayName: "Transferir imagem para a EC2"
+                  inputs:
+                    sshEndpoint: ${{ variables.sshServiceConnection }}
+                    sourceFolder: $(Pipeline.Workspace)/release
+                    contents: "**"
+                    targetFolder: /opt/lojagamer/releases/$(imageTag)
+                    readyTimeout: "30000"
+
+                - task: SSH@0
+                  displayName: "Atualizar container na EC2"
+                  inputs:
+                    sshEndpoint: ${{ variables.sshServiceConnection }}
+                    runOptions: commands
+                    commands: bash /opt/lojagamer/releases/$(imageTag)/deploy.sh $(imageTag)
+                    failOnStdErr: false
+                    readyTimeout: "30000"
+
+                - script: |
+                    set -uo pipefail
+                    URL="http://$(EC2_HOST)"
+                    EXPECTED="$(Build.SourceVersion)"
+                    for i in $(seq 1 20); do
+                      BODY="$(curl -fsS --max-time 5 "$URL/healthz" || true)"
+                      if [ -n "$BODY" ] && echo "$BODY" | jq -e --arg v "$EXPECTED" '.status == "ok" and .version == $v' >/dev/null; then
+                        echo "$BODY" | jq .
+                        curl -fsS "$URL/api/products" | jq -e 'length > 0' >/dev/null || { echo "##vso[task.logissue type=error]API sem produtos"; exit 1; }
+                        curl -fsS -o /dev/null "$URL/" || { echo "##vso[task.logissue type=error]Frontend fora do ar"; exit 1; }
+                        echo "Deploy validado: versão $EXPECTED no ar em $URL"
+                        exit 0
+                      fi
+                      echo "Tentativa $i: aguardando a versão $EXPECTED... resposta: ${BODY:-sem resposta}"
+                      sleep 5
+                    done
+                    echo "##vso[task.logissue type=error]A aplicação em $URL não respondeu com a versão $EXPECTED"
+                    exit 1
+                  displayName: "Validar deploy (health check público)"

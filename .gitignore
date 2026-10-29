@@ -1,0 +1,24 @@
+# Segredos
+.env
+.env.*
+!.env.example
+*.pem
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/test-results/
+
+# Backend
+backend/coverage*
+backend/test-results/
+backend/server
+backend/*.exe
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+docs/
